@@ -32,7 +32,7 @@ public class DataController {
         this.fileService = fileService;
     }
 
-    @Scheduled(fixedDelay = 5000)
+    @Scheduled(fixedDelay = 1000)
     public void process() throws Exception {
         ArrayList<String> pending = new ArrayList<>();
         for (TaskSwapper task : BlockchainService.getPending()) {
@@ -46,6 +46,7 @@ public class DataController {
             task.setTaskSender(userService.getCurrent().getAddress());
             task.setFuture(dataService.writeAsync(systemService.getSysAddress(), propertyName, userService.getCurrent(), fileNo, task.getTaskContent()));
             BlockchainService.addPending(task);
+            Thread.sleep(200);
         }
     }
 
@@ -83,6 +84,7 @@ public class DataController {
                     fileService.record(property, fileNo, id, single.get(id).getData());
 
                     result.add(fileNo);
+                    Thread.sleep(5);
                 }
             }
         }

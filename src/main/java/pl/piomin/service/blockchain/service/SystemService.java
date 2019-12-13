@@ -72,7 +72,7 @@ public class SystemService {
         this.sysAddress = system.getContractAddress();
 
         //Roles
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 3; i++) {
             TransactionReceipt transactionReceipt = system.addRC(new Utf8String(RoleType.Types.get(i)), new Address(UserService.accounts[i + 1])).send();
             LOGGER.info("Transaction succeed: " + transactionReceipt.toString());
         }
@@ -80,31 +80,6 @@ public class SystemService {
         //Properties
         String admin = UserService.accounts[0];
         for (int j = 0; j < PropertyType.Types.size(); j++) {
-            if (j == 0) {
-                admin = UserService.accounts[1];
-            }
-            if (j == 8) {
-                admin = UserService.accounts[2];
-            }
-            if (j == 14) {
-                admin = UserService.accounts[3];
-            }
-            if (j == 20) {
-                admin = UserService.accounts[4];
-            }
-            if (j == 26) {
-                admin = UserService.accounts[5];
-            }
-            if (j == 35) {
-                admin = UserService.accounts[6];
-            }
-            if (j == 43) {
-                admin = UserService.accounts[7];
-            }
-            if (j == 52) {
-                admin = UserService.accounts[8];
-            }
-
             TransactionReceipt transactionReceipt = system.addSC(new Utf8String(PropertyType.Types.get(j)), new Address(admin)).send();
             LOGGER.info("Transaction succeed: " + transactionReceipt.toString());
         }

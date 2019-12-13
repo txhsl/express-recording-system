@@ -11,17 +11,7 @@ import java.util.Arrays;
 public class RoleType {
 
     public static ArrayList<String> Types = new ArrayList<>(
-        Arrays.asList(
-        "Farm",
-        "Abattoir",
-        "Packaging",
-        "Warehousing",
-        "Logistics",
-        "Processor",
-        "Distribution ",
-        "Retailer",
-        "Consumer",
-        "Regulator")
+        Arrays.asList("Admin", "User", "Deliverer")
     );
 
     public static int getID(String roleName) {
