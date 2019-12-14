@@ -81,7 +81,7 @@ public class SystemController {
     @PostMapping("/permitProperty")
     public TransactionReceipt permitProperty(@RequestBody NewContractSwapper property) throws Exception {
         RoleType.Types.add(property.getName());
-        return systemService.addSC(property.getName(), new Address(property.getAdmin()), userService.getCurrent());
+        return systemService.addDC(property.getName(), new Address(property.getAdmin()), userService.getCurrent());
     }
 
     @GetMapping("/getRole/{address}")

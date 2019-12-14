@@ -41,7 +41,7 @@ public class DataController {
         TaskSwapper[] newTasks = fileService.process(pending.toArray(new String[0]));
         for (TaskSwapper task : newTasks) {
             String propertyName = task.getTaskName().substring(0, task.getTaskName().lastIndexOf('_'));
-            String scAddr = systemService.getSC(propertyName, userService.getCurrent());
+            String scAddr = systemService.getDC(propertyName, userService.getCurrent());
             String fileNo = dataService.getFileNum(scAddr, task.getTaskName().substring(task.getTaskName().lastIndexOf('_') + 1), userService.getCurrent());
             task.setTaskSender(userService.getCurrent().getAddress());
             task.setFuture(dataService.writeAsync(systemService.getSysAddress(), propertyName, userService.getCurrent(), fileNo, task.getTaskContent()));
@@ -54,7 +54,7 @@ public class DataController {
     @PostMapping("/write")
     public String writeData(@RequestBody DataSwapper data) throws Exception {
         //Check permission
-        String scAddr = systemService.getSC(data.getPropertyName(), userService.getCurrent());
+        String scAddr = systemService.getDC(data.getPropertyName(), userService.getCurrent());
         if (!userService.checkWriter(systemService.getSysAddress(), data.getPropertyName())) {
             return null;
         }
@@ -74,7 +74,7 @@ public class DataController {
 
         for (String property: data.getData().keySet()) {
             Map<String, DataSwapper> single = data.getData().get(property);
-            String scAddr = systemService.getSC(property, userService.getCurrent());
+            String scAddr = systemService.getDC(property, userService.getCurrent());
 
             if (userService.checkWriter(systemService.getSysAddress(), property)) {
                 for (String id : single.keySet()) {
@@ -94,7 +94,7 @@ public class DataController {
     @PostMapping("/read")
     public DataSwapper readData(@RequestBody DataSwapper data) throws Exception {
         //Check permission
-        String scAddr = systemService.getSC(data.getPropertyName(), userService.getCurrent());
+        String scAddr = systemService.getDC(data.getPropertyName(), userService.getCurrent());
         if (!userService.checkReader(systemService.getSysAddress(), data.getPropertyName())) {
             return data;
         }
@@ -151,7 +151,7 @@ public class DataController {
         Map<String, Map<String, DataSwapper>> resultMulti = new HashMap<>();
 
         for (String property : data.getPropertyNames()) {
-            String scAddr = systemService.getSC(property, userService.getCurrent());
+            String scAddr = systemService.getDC(property, userService.getCurrent());
             if (scAddr.equals("0x0000000000000000000000000000000000000000")) {
                 continue;
             }

@@ -13,8 +13,9 @@ public class PropertyType {
     public static ArrayList<String> Types = new ArrayList<>(
         Arrays.asList(
         "imgQR", "sender", "senderPhone", "receiver", "receiverPhone",
+        "senderAddress", "receiverAddress",
         "date", "deliverer", "fee",
-        "ordered", "pickedUp", "delivered", "received")
+        "ordered", "pickedUp", "delivering", "received")
     );
 
     public static int getID(String propertyName) {

@@ -9,20 +9,25 @@ public class OrderForm {
 
     private String id;
     private String imgQR;
+    private String value;
     private String sender;
     private String senderPhone;
+    private String senderAddress;
     private String receiver;
     private String receiverPhone;
+    private String receiverAddress;
     private String date;
 
-    public OrderForm(String imgQR, String sender, String senderPhone, String receiver,
-                String receiverPhone, String date) {
+    public OrderForm(String imgQR, String value, String sender, String senderPhone, String senderAddress,
+                     String receiver, String receiverPhone, String receiverAddress, String date) {
         this.imgQR = imgQR;
+        this.value = value;
         this.sender = sender;
         this.senderPhone = senderPhone;
+        this.senderAddress = senderAddress;
         this.receiver = receiver;
         this.receiverPhone = receiverPhone;
-        this.receiverPhone = receiverPhone;
+        this.receiverAddress = receiverAddress;
         this.date = date;
     }
 
@@ -34,12 +39,20 @@ public class OrderForm {
         this.id = id;
     }
 
-    public String getimgQR() {
+    public String getImgQR() {
         return imgQR;
     }
 
     public void setImgQR(String imgQR) {
         imgQR = imgQR;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public String getDate() {
@@ -54,6 +67,10 @@ public class OrderForm {
         return receiverPhone;
     }
 
+    public String getReceiverAddress() {
+        return receiverAddress;
+    }
+
     public String getSender() {
         return sender;
     }
@@ -62,23 +79,11 @@ public class OrderForm {
         return senderPhone;
     }
 
+    public String getSenderAddress() {
+        return senderAddress;
+    }
+
     public void setDate(String date) {
         this.date = date;
-    }
-
-    public void setReceiver(String receiver) {
-        this.receiver = receiver;
-    }
-
-    public void setReceiverPhone(String receiverPhone) {
-        this.receiverPhone = receiverPhone;
-    }
-
-    public void setSender(String sender) {
-        this.sender = sender;
-    }
-
-    public void setSenderPhone(String senderPhone) {
-        this.senderPhone = senderPhone;
     }
 }

@@ -68,7 +68,7 @@ public class MessageController {
                 RoleType.Types.add(msg.getPermission().getPropertyName());
                 break;
             case Property:
-                permissionTask.setFuture(systemService.addSCAsync(msg.getPermission().getPropertyName(), new Address(msg.getPermission().getTarget()), userService.getCurrent()));
+                permissionTask.setFuture(systemService.addDCAsync(msg.getPermission().getPropertyName(), new Address(msg.getPermission().getTarget()), userService.getCurrent()));
                 PropertyType.Types.add(msg.getPermission().getPropertyName());
                 break;
             case Permission:

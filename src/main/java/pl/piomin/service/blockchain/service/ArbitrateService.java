@@ -4,14 +4,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.web3j.abi.datatypes.Address;
-import org.web3j.abi.datatypes.generated.Uint256;
+import org.web3j.abi.datatypes.Utf8String;
 import org.web3j.crypto.Credentials;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
 import pl.piomin.service.blockchain.contract.System_sol_System;
 import pl.piomin.service.blockchain.model.Report;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -51,11 +50,9 @@ public class ArbitrateService {
         Report report = reportbox.get(credentials.getAddress()).get(index);
         reportbox.get(credentials.getAddress()).remove(index);
         if (agree) {
-            return transferFrom(sysAddr, report.getTarget(), report.getFrom(), report.getAmount(), credentials);
+            return refund(sysAddr, report.getOrder(), credentials);
         }
-        else {
-            return transferFrom(sysAddr, report.getFrom(), report.getTarget(), report.getAmount(), credentials);
-        }
+        return null;
     }
 
     public ArrayList<Report> get(String address) {
@@ -66,13 +63,13 @@ public class ArbitrateService {
         return reportbox.get(address).get(index);
     }
 
-    private CompletableFuture<TransactionReceipt> transferFrom(String sysAddr, String from, String to, int amount, Credentials credentials) throws Exception {
+    private CompletableFuture<TransactionReceipt> refund(String sysAddr, String order, Credentials credentials) throws Exception {
         int count = 0;
 
         while(count < REQUEST_LIMIT) {
             try {
                 System_sol_System system = System_sol_System.load(sysAddr, web3j, credentials, GAS_PRICE, GAS_LIMIT);
-                return system.transferFrom(new Address(from), new Address(to), new Uint256(BigInteger.valueOf(amount))).sendAsync();
+                return system.refund(new Utf8String(order)).sendAsync();
             } catch (NullPointerException e) {
                 LOGGER.error(e.toString());
                 count++;
@@ -81,13 +78,13 @@ public class ArbitrateService {
         throw new NullPointerException();
     }
 
-    public int getLevel(String sysAddr, String addr, Credentials credentials) throws Exception {
+    public int getBalance(String sysAddr, String addr, Credentials credentials) throws Exception {
         int count = 0;
 
         while(count < REQUEST_LIMIT) {
             try {
                 System_sol_System system = System_sol_System.load(sysAddr, web3j, credentials, GAS_PRICE, GAS_LIMIT);
-                int level = system.getLevel(new Address(addr)).send().getValue().intValue();
+                int level = system.balanceOf(new Address(addr)).send().getValue().intValue();
                 LOGGER.info("Level read: " + level);
                 return level;
             } catch (NullPointerException e) {

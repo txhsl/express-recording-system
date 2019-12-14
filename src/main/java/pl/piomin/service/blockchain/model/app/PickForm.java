@@ -4,7 +4,6 @@ public class PickForm {
 
     private String id;
     private String weight;
-    private String fee;
 
     public PickForm(String id, String weight){
         this.id = id;

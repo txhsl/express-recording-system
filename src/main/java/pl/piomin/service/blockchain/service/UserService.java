@@ -80,58 +80,66 @@ public class UserService {
     }
 
     public boolean reset(String sysAddr) throws Exception {
-        //link RCs and SCs
+        //link RCs and DCs
         if (signIn(accounts[0], "Innov@teD@ily1")) {
             //Admin
             resetReaderAsync(sysAddr,"Admin", "imgQR");
             resetReaderAsync(sysAddr,"Admin", "sender");
             resetReaderAsync(sysAddr,"Admin", "senderPhone");
+            resetReaderAsync(sysAddr,"Admin", "senderAddress");
             resetReaderAsync(sysAddr,"Admin", "receiver");
             resetReaderAsync(sysAddr,"Admin", "receiverPhone");
+            resetReaderAsync(sysAddr,"Admin", "receiverAddress");
             resetReaderAsync(sysAddr,"Admin", "deliverer");
             resetReaderAsync(sysAddr,"Admin", "fee");
             resetReaderAsync(sysAddr,"Admin", "ordered");
             resetReaderAsync(sysAddr,"Admin", "pickedUp");
-            resetReaderAsync(sysAddr,"Admin", "delivered");
+            resetReaderAsync(sysAddr,"Admin", "delivering");
             resetReaderAsync(sysAddr,"Admin", "received");
             //User
             resetReaderAsync(sysAddr,"User", "imgQR");
             resetReaderAsync(sysAddr,"User", "sender");
             resetReaderAsync(sysAddr,"User", "senderPhone");
+            resetReaderAsync(sysAddr,"User", "senderAddress");
             resetReaderAsync(sysAddr,"User", "receiver");
             resetReaderAsync(sysAddr,"User", "receiverPhone");
+            resetReaderAsync(sysAddr,"User", "receiverAddress");
             resetReaderAsync(sysAddr,"User", "deliverer");
             resetReaderAsync(sysAddr,"User", "fee");
             resetReaderAsync(sysAddr,"User", "ordered");
             resetReaderAsync(sysAddr,"User", "pickedUp");
-            resetReaderAsync(sysAddr,"User", "delivered");
+            resetReaderAsync(sysAddr,"User", "delivering");
             resetReaderAsync(sysAddr,"User", "received");
 
             resetWriterAsync(sysAddr,"User", "imgQR");
             resetWriterAsync(sysAddr,"User", "sender");
             resetWriterAsync(sysAddr,"User", "senderPhone");
+            resetWriterAsync(sysAddr,"User", "senderAddress");
             resetWriterAsync(sysAddr,"User", "receiver");
             resetWriterAsync(sysAddr,"User", "receiverPhone");
+            resetWriterAsync(sysAddr,"User", "receiverAddress");
 
-            resetWriterAsync(sysAddr,"Deliverer", "ordered");
-            resetWriterAsync(sysAddr,"Deliverer", "received");
+            resetWriterAsync(sysAddr,"User", "ordered");
+            resetWriterAsync(sysAddr,"User", "received");
             //Deliverer
             resetReaderAsync(sysAddr,"Deliverer", "imgQR");
             resetReaderAsync(sysAddr,"Deliverer", "sender");
             resetReaderAsync(sysAddr,"Deliverer", "senderPhone");
+            resetReaderAsync(sysAddr,"Deliverer", "senderAddress");
             resetReaderAsync(sysAddr,"Deliverer", "receiver");
             resetReaderAsync(sysAddr,"Deliverer", "receiverPhone");
+            resetReaderAsync(sysAddr,"Deliverer", "receiverAddress");
             resetReaderAsync(sysAddr,"Deliverer", "deliverer");
             resetReaderAsync(sysAddr,"Deliverer", "fee");
             resetReaderAsync(sysAddr,"Deliverer", "ordered");
             resetReaderAsync(sysAddr,"Deliverer", "pickedUp");
-            resetReaderAsync(sysAddr,"Deliverer", "delivered");
+            resetReaderAsync(sysAddr,"Deliverer", "delivering");
             resetReaderAsync(sysAddr,"Deliverer", "received");
 
             resetWriterAsync(sysAddr,"Deliverer", "deliverer");
             resetWriterAsync(sysAddr,"Deliverer", "fee");
             resetWriterAsync(sysAddr,"Deliverer", "pickedUp");
-            resetWriterAsync(sysAddr,"Deliverer", "delivered");
+            resetWriterAsync(sysAddr,"Deliverer", "delivering");
         }
         sendTx();
         return true;
@@ -358,7 +366,7 @@ public class UserService {
 
             while(!flag && count < REQUEST_LIMIT) {
                 try {
-                    String scAddr = system.getSC(new Utf8String(property)).send().getValue();
+                    String scAddr = system.getDC(new Utf8String(property)).send().getValue();
                     Data_sol_Data sc = Data_sol_Data.load(scAddr, web3j, current, GAS_PRICE, GAS_LIMIT);
                     if (sc.getAdmin().send().getValue().equals(userAddr)) {
                         result.putIfAbsent(property, scAddr);

@@ -80,7 +80,7 @@ public class SystemService {
         //Properties
         String admin = UserService.accounts[0];
         for (int j = 0; j < PropertyType.Types.size(); j++) {
-            TransactionReceipt transactionReceipt = system.addSC(new Utf8String(PropertyType.Types.get(j)), new Address(admin)).send();
+            TransactionReceipt transactionReceipt = system.addDC(new Utf8String(PropertyType.Types.get(j)), new Address(admin)).send();
             LOGGER.info("Transaction succeed: " + transactionReceipt.toString());
         }
 
@@ -160,13 +160,13 @@ public class SystemService {
         throw new NullPointerException();
     }
 
-    public TransactionReceipt addSC(String name, Address admin, Credentials credentials) throws Exception {
+    public TransactionReceipt addDC(String name, Address admin, Credentials credentials) throws Exception {
         int count = 0;
 
         while(count < REQUEST_LIMIT) {
             try {
                 System_sol_System system = System_sol_System.load(this.sysAddress, web3j, credentials, GAS_PRICE, GAS_LIMIT);
-                TransactionReceipt transactionReceipt = system.addSC(new Utf8String(name), admin).send();
+                TransactionReceipt transactionReceipt = system.addDC(new Utf8String(name), admin).send();
 
                 LOGGER.info("Transaction succeed: " + transactionReceipt.toString());
                 return transactionReceipt;
@@ -178,13 +178,13 @@ public class SystemService {
         throw new NullPointerException();
     }
 
-    public CompletableFuture<TransactionReceipt> addSCAsync(String name, Address admin, Credentials credentials) throws Exception {
+    public CompletableFuture<TransactionReceipt> addDCAsync(String name, Address admin, Credentials credentials) throws Exception {
         int count = 0;
 
         while(count < REQUEST_LIMIT) {
             try {
                 System_sol_System system = System_sol_System.load(this.sysAddress, web3j, credentials, GAS_PRICE, GAS_LIMIT);
-                return system.addSC(new Utf8String(name), admin).sendAsync();
+                return system.addDC(new Utf8String(name), admin).sendAsync();
             } catch (NullPointerException e) {
                 LOGGER.error(e.toString());
                 count++;
@@ -233,13 +233,13 @@ public class SystemService {
         throw new NullPointerException();
     }
 
-    public String getSC(String propertyName, Credentials credentials) throws Exception {
+    public String getDC(String propertyName, Credentials credentials) throws Exception {
         int count = 0;
 
         while(count < REQUEST_LIMIT) {
             try {
                 System_sol_System system = System_sol_System.load(this.sysAddress, web3j, credentials, GAS_PRICE, GAS_LIMIT);
-                String scAddr = system.getSC(new Utf8String(propertyName)).send().getValue();
+                String scAddr = system.getDC(new Utf8String(propertyName)).send().getValue();
 
                 LOGGER.info("Read succeed: " + scAddr);
                 return scAddr;
@@ -286,7 +286,7 @@ public class SystemService {
 
             while(!flag && count < REQUEST_LIMIT) {
                 try {
-                    String scAddr = system.getSC(new Utf8String(property)).send().getValue();
+                    String scAddr = system.getDC(new Utf8String(property)).send().getValue();
                     if (!scAddr.equals("")) {
                         result.putIfAbsent(property, scAddr);
                     }

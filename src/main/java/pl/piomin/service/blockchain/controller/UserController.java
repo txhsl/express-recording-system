@@ -35,7 +35,7 @@ public class UserController {
 
     @PostMapping("/requestReader")
     public Result requestReader(@RequestBody PermissionSwapper permission) throws Exception {
-        String scAddr = systemService.getSC(permission.getPropertyName(), userService.getCurrent());
+        String scAddr = systemService.getDC(permission.getPropertyName(), userService.getCurrent());
 
         permission.setIsRead(true);
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -46,7 +46,7 @@ public class UserController {
 
     @PostMapping("/requestWriter")
     public Result requestWriter(@RequestBody PermissionSwapper permission) throws Exception {
-        String scAddr = systemService.getSC(permission.getPropertyName(), userService.getCurrent());
+        String scAddr = systemService.getDC(permission.getPropertyName(), userService.getCurrent());
 
         permission.setIsRead(false);
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -55,7 +55,7 @@ public class UserController {
         return new Result(true);
     }
 
-    //SC owner
+    //DC owner
     @PostMapping("/permitReader")
     public Result permitReader(@RequestBody PermissionSwapper permission) throws Exception {
         TaskSwapper task = new TaskSwapper(permission.getPropertyName(), Message.Type.Permission.toString(), userService.getCurrent().getAddress());
@@ -63,7 +63,7 @@ public class UserController {
         BlockchainService.addPending(task);
         return new Result(true);
     }
-    //SC owner
+    //DC owner
     @PostMapping("/permitWriter")
     public Result permitWriter(@RequestBody PermissionSwapper permission) throws Exception {
         TaskSwapper task = new TaskSwapper(permission.getPropertyName(), Message.Type.Permission.toString(), userService.getCurrent().getAddress());
