@@ -2,7 +2,6 @@ package pl.piomin.service.blockchain.controller.app;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import pl.piomin.service.blockchain.PropertyType;
 import pl.piomin.service.blockchain.exception.NoPermissionException;
 import pl.piomin.service.blockchain.model.FileSwapper;
 import pl.piomin.service.blockchain.model.Message;
