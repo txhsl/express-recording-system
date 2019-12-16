@@ -83,9 +83,11 @@ public class SystemService {
             LOGGER.info("Transaction succeed: " + transactionReceipt.toString());
         }
 
-        for (int i = 0; i < 3; i++) {
+        TransactionReceipt receipt = register(new Address(UserService.accounts[0]), RoleType.Types.get(0), credentials);
+        LOGGER.info("Transaction succeed: " + receipt.toString());
+        for (int i = 1; i < 9; i++) {
             //register
-            TransactionReceipt transactionReceipt = register(new Address(UserService.accounts[i]), RoleType.Types.get(i), credentials);
+            TransactionReceipt transactionReceipt = register(new Address(UserService.accounts[i]), RoleType.Types.get((i+1)%2+1), credentials);
             LOGGER.info("Transaction succeed: " + transactionReceipt.toString());
         }
         return true;
