@@ -73,21 +73,19 @@ public class SystemService {
 
         //Roles
         for (int i = 0; i < 3; i++) {
-            TransactionReceipt transactionReceipt = system.addRC(new Utf8String(RoleType.Types.get(i)), new Address(UserService.accounts[i + 1])).send();
+            TransactionReceipt transactionReceipt = system.addRC(new Utf8String(RoleType.Types.get(i)), new Address(UserService.accounts[0])).send();
             LOGGER.info("Transaction succeed: " + transactionReceipt.toString());
         }
 
         //Properties
-        String admin = UserService.accounts[0];
         for (int j = 0; j < PropertyType.Types.size(); j++) {
-            TransactionReceipt transactionReceipt = system.addDC(new Utf8String(PropertyType.Types.get(j)), new Address(admin)).send();
+            TransactionReceipt transactionReceipt = system.addDC(new Utf8String(PropertyType.Types.get(j)), new Address(UserService.accounts[0])).send();
             LOGGER.info("Transaction succeed: " + transactionReceipt.toString());
         }
 
-        for (int i = 0; i < 10; i++) {
-            //register admin
-            Credentials current = signIn(UserService.accounts[i + 1], "Innov@teD@ily1");
-            TransactionReceipt transactionReceipt = register(new Address(UserService.accounts[i + 1]), RoleType.Types.get(i), current);
+        for (int i = 0; i < 3; i++) {
+            //register
+            TransactionReceipt transactionReceipt = register(new Address(UserService.accounts[i]), RoleType.Types.get(i), credentials);
             LOGGER.info("Transaction succeed: " + transactionReceipt.toString());
         }
         return true;

@@ -13,7 +13,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class Message {
     public enum Type {
-        Property, Role, Permission, Register, Report
+        Property, Role, Permission, Register, Report, Order, Pick, Deliver, Receive
     }
 
     private PermissionSwapper permission;

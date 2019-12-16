@@ -14,7 +14,7 @@ public class PropertyType {
         Arrays.asList(
         "imgQR", "sender", "senderPhone", "receiver", "receiverPhone",
         "senderAddress", "receiverAddress",
-        "date", "deliverer", "fee",
+        "value", "weight", "date", "deliverer", "fee",
         "ordered", "pickedUp", "delivering", "received")
     );
 

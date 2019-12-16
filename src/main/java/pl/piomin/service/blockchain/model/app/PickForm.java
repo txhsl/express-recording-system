@@ -27,6 +27,6 @@ public class PickForm {
     }
 
     public String getFee() {
-        return String.valueOf(Long.parseLong(weight)/100);
+        return String.valueOf(Double.valueOf(weight)/100);
     }
 }

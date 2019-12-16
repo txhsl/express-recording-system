@@ -86,7 +86,7 @@ public class ArbitrateController {
     }
 
     @GetMapping("/balance/{address}")
-    public int getBalance(@PathVariable String address) throws Exception {
+    public double getBalance(@PathVariable String address) throws Exception {
         return arbitrateService.getBalance(systemService.getSysAddress(), address, userService.getCurrent());
     }
 }

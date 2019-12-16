@@ -91,7 +91,10 @@ public class UserService {
             resetReaderAsync(sysAddr,"Admin", "receiverPhone");
             resetReaderAsync(sysAddr,"Admin", "receiverAddress");
             resetReaderAsync(sysAddr,"Admin", "deliverer");
+            resetReaderAsync(sysAddr,"Admin", "value");
+            resetReaderAsync(sysAddr,"Admin", "weight");
             resetReaderAsync(sysAddr,"Admin", "fee");
+            resetReaderAsync(sysAddr,"Admin", "date");
             resetReaderAsync(sysAddr,"Admin", "ordered");
             resetReaderAsync(sysAddr,"Admin", "pickedUp");
             resetReaderAsync(sysAddr,"Admin", "delivering");
@@ -105,7 +108,10 @@ public class UserService {
             resetReaderAsync(sysAddr,"User", "receiverPhone");
             resetReaderAsync(sysAddr,"User", "receiverAddress");
             resetReaderAsync(sysAddr,"User", "deliverer");
+            resetReaderAsync(sysAddr,"User", "value");
+            resetReaderAsync(sysAddr,"User", "weight");
             resetReaderAsync(sysAddr,"User", "fee");
+            resetReaderAsync(sysAddr,"User", "date");
             resetReaderAsync(sysAddr,"User", "ordered");
             resetReaderAsync(sysAddr,"User", "pickedUp");
             resetReaderAsync(sysAddr,"User", "delivering");
@@ -118,6 +124,8 @@ public class UserService {
             resetWriterAsync(sysAddr,"User", "receiver");
             resetWriterAsync(sysAddr,"User", "receiverPhone");
             resetWriterAsync(sysAddr,"User", "receiverAddress");
+            resetWriterAsync(sysAddr,"User", "value");
+            resetWriterAsync(sysAddr,"User", "date");
 
             resetWriterAsync(sysAddr,"User", "ordered");
             resetWriterAsync(sysAddr,"User", "received");
@@ -130,13 +138,17 @@ public class UserService {
             resetReaderAsync(sysAddr,"Deliverer", "receiverPhone");
             resetReaderAsync(sysAddr,"Deliverer", "receiverAddress");
             resetReaderAsync(sysAddr,"Deliverer", "deliverer");
+            resetReaderAsync(sysAddr,"Deliverer", "value");
+            resetReaderAsync(sysAddr,"Deliverer", "weight");
             resetReaderAsync(sysAddr,"Deliverer", "fee");
+            resetReaderAsync(sysAddr,"Deliverer", "date");
             resetReaderAsync(sysAddr,"Deliverer", "ordered");
             resetReaderAsync(sysAddr,"Deliverer", "pickedUp");
             resetReaderAsync(sysAddr,"Deliverer", "delivering");
             resetReaderAsync(sysAddr,"Deliverer", "received");
 
             resetWriterAsync(sysAddr,"Deliverer", "deliverer");
+            resetWriterAsync(sysAddr,"Deliverer", "weight");
             resetWriterAsync(sysAddr,"Deliverer", "fee");
             resetWriterAsync(sysAddr,"Deliverer", "pickedUp");
             resetWriterAsync(sysAddr,"Deliverer", "delivering");

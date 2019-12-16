@@ -8,9 +8,11 @@ import org.web3j.abi.datatypes.Utf8String;
 import org.web3j.crypto.Credentials;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
+import org.web3j.utils.Convert;
 import pl.piomin.service.blockchain.contract.System_sol_System;
 import pl.piomin.service.blockchain.model.Report;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -78,15 +80,15 @@ public class ArbitrateService {
         throw new NullPointerException();
     }
 
-    public int getBalance(String sysAddr, String addr, Credentials credentials) throws Exception {
+    public double getBalance(String sysAddr, String addr, Credentials credentials) throws Exception {
         int count = 0;
 
         while(count < REQUEST_LIMIT) {
             try {
                 System_sol_System system = System_sol_System.load(sysAddr, web3j, credentials, GAS_PRICE, GAS_LIMIT);
-                int level = system.balanceOf(new Address(addr)).send().getValue().intValue();
-                LOGGER.info("Level read: " + level);
-                return level;
+                BigInteger balance = system.balanceOf(new Address(addr)).send().getValue();
+                LOGGER.info("Balance read: " + balance);
+                return Convert.fromWei(balance.toString(), Convert.Unit.ETHER).doubleValue();
             } catch (NullPointerException e) {
                 LOGGER.error(e.toString());
                 count++;
